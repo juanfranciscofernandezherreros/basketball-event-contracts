@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0 - 2026-09-25
+
+- [minor] KAN-75 añade `contractVersion` opcional a `FileEventValue` para trazabilidad de contrato.
+- [minor] KAN-75 añade `routedAtEpochMillis` opcional para registrar el momento de paso por el router.
+- [minor] Ambos campos son backward-compatible: nullable y con default `null`.
+
+
 ## 1.1.0 - 2026-09-25
 
 - [minor] KAN-84 añade `expectedRows` opcional a `FileEventValue`, con default `null`.
