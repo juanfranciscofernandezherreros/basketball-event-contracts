@@ -1,0 +1,10 @@
+{
+  "namespace":"com.fernandez.fixtures.avro",
+  "type":"record",
+  "name":"FixtureKey",
+  "fields":[
+    {"name":"matchId","type":"string"},
+    {"name":"country","type":"string"},
+    {"name":"competition","type":"string"}
+  ]
+}

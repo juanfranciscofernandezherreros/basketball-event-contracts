@@ -1,0 +1,13 @@
+{
+  "namespace":"com.fernandez.fixtures.avro",
+  "type":"record",
+  "name":"FixtureValue",
+  "fields":[
+    {"name":"matchId","type":"string"},
+    {"name":"country","type":"string"},
+    {"name":"competition","type":"string"},
+    {"name":"eventTime","type":["null","string"],"default":null},
+    {"name":"homeTeam","type":["null","string"],"default":null},
+    {"name":"awayTeam","type":["null","string"],"default":null}
+  ]
+}

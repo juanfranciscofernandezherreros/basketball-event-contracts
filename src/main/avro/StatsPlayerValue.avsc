@@ -1,0 +1,32 @@
+{
+  "namespace": "com.example.csvstats.avro",
+  "type": "record",
+  "name": "StatsPlayerValue",
+  "fields": [
+    {"name":"sourceEventId","type":"string"},
+    {"name":"matchId","type":"string"},
+    {"name":"name","type":"string"},
+    {"name":"team","type":"string"},
+    {"name":"pts","type":["null","int"],"default":null},
+    {"name":"reb","type":["null","int"],"default":null},
+    {"name":"ast","type":["null","int"],"default":null},
+    {"name":"min","type":"string"},
+    {"name":"fgm","type":["null","int"],"default":null},
+    {"name":"fga","type":["null","int"],"default":null},
+    {"name":"twopm","type":["null","int"],"default":null},
+    {"name":"twopa","type":["null","int"],"default":null},
+    {"name":"threepm","type":["null","int"],"default":null},
+    {"name":"threepa","type":["null","int"],"default":null},
+    {"name":"ftm","type":["null","int"],"default":null},
+    {"name":"fta","type":["null","int"],"default":null},
+    {"name":"plusMinus","type":["null","int"],"default":null},
+    {"name":"or","type":["null","int"],"default":null},
+    {"name":"dr","type":["null","int"],"default":null},
+    {"name":"pf","type":["null","int"],"default":null},
+    {"name":"st","type":["null","int"],"default":null},
+    {"name":"to","type":["null","int"],"default":null},
+    {"name":"bs","type":["null","int"],"default":null},
+    {"name":"ba","type":["null","int"],"default":null},
+    {"name":"tfs","type":["null","int"],"default":null}
+  ]
+}

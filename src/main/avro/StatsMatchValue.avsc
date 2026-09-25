@@ -1,0 +1,28 @@
+{
+  "namespace":"com.example.matchsummary.avro",
+  "type":"record",
+  "name":"StatsMatchValue",
+  "fields":[
+    {"name":"sourceEventId","type":"string"},
+    {"name":"matchId","type":"string"},
+    {"name":"date","type":["null","string"],"default":null},
+    {"name":"homeName","type":["null","string"],"default":null},
+    {"name":"homeImage","type":["null","string"],"default":null},
+    {"name":"awayName","type":["null","string"],"default":null},
+    {"name":"awayImage","type":["null","string"],"default":null},
+    {"name":"resultHome","type":["null","string"],"default":null},
+    {"name":"resultAway","type":["null","string"],"default":null},
+    {"name":"totalLocal","type":["null","string"],"default":null},
+    {"name":"firstLocal","type":["null","string"],"default":null},
+    {"name":"secondLocal","type":["null","string"],"default":null},
+    {"name":"thirdLocal","type":["null","string"],"default":null},
+    {"name":"fourthLocal","type":["null","string"],"default":null},
+    {"name":"extraLocal","type":["null","string"],"default":null},
+    {"name":"totalAway","type":["null","string"],"default":null},
+    {"name":"firstAway","type":["null","string"],"default":null},
+    {"name":"secondAway","type":["null","string"],"default":null},
+    {"name":"thirdAway","type":["null","string"],"default":null},
+    {"name":"fourthAway","type":["null","string"],"default":null},
+    {"name":"extraAway","type":["null","string"],"default":null}
+  ]
+}

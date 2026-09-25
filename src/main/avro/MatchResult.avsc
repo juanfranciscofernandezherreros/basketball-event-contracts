@@ -1,0 +1,25 @@
+{
+  "type": "record",
+  "name": "MatchResult",
+  "namespace": "com.fernandez.results.avro",
+  "fields": [
+    {"name":"matchId","type":"string"},
+    {"name":"eventTime","type":["null","string"],"default":null},
+    {"name":"homeTeam","type":["null","string"],"default":null},
+    {"name":"awayTeam","type":["null","string"],"default":null},
+    {"name":"homeScore","type":["null","int"],"default":null},
+    {"name":"awayScore","type":["null","int"],"default":null},
+    {"name":"homeScore1","type":["null","int"],"default":null},
+    {"name":"homeScore2","type":["null","int"],"default":null},
+    {"name":"homeScore3","type":["null","int"],"default":null},
+    {"name":"homeScore4","type":["null","int"],"default":null},
+    {"name":"homeScore5","type":["null","int"],"default":null},
+    {"name":"awayScore1","type":["null","int"],"default":null},
+    {"name":"awayScore2","type":["null","int"],"default":null},
+    {"name":"awayScore3","type":["null","int"],"default":null},
+    {"name":"awayScore4","type":["null","int"],"default":null},
+    {"name":"awayScore5","type":["null","int"],"default":null},
+    {"name":"country","type":["null","string"],"default":null},
+    {"name":"competition","type":["null","string"],"default":null}
+  ]
+}
