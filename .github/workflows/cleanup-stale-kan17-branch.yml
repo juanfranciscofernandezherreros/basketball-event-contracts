@@ -1,0 +1,39 @@
+name: cleanup-stale-kan17-branch
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete stale KAN-17 bootstrap branch if present
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const ref = 'heads/KAN-17-centralize-avro-contracts';
+            try {
+              await github.rest.git.getRef({ owner, repo, ref });
+            } catch (error) {
+              if (error.status === 404) {
+                core.info('Stale branch already absent.');
+                return;
+              }
+              throw error;
+            }
+
+            await github.rest.git.deleteRef({ owner, repo, ref });
+
+            try {
+              await github.rest.git.getRef({ owner, repo, ref });
+              core.setFailed('Stale branch still exists after deletion.');
+            } catch (error) {
+              if (error.status !== 404) throw error;
+              core.info('Verified stale KAN-17 branch deleted.');
+            }

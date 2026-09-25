@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 - 2026-09-25
+
+- [patch] Publica automáticamente el artefacto Maven en GitHub Packages al integrar cambios en `main`.
+- [patch] Añade limpieza de la rama inicial de KAN-17 que quedó tras el primer merge manual.
+
+
 ## 1.0.0 - 2026-09-25
 
 - [major] KAN-17 crea la fuente de verdad de contratos Kafka/Avro de Basketball Stats.
