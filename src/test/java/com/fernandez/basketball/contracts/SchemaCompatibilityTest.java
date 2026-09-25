@@ -35,6 +35,26 @@ class SchemaCompatibilityTest {
     }
 
     @Test
+    void fileEventValueSupportsRoutingMetadata() throws Exception {
+        Map<String, Schema> current = loadSchemas(Path.of("src/main/avro"));
+        Schema fileEventValue = current.get("com.example.csvwatcher.watcher.FileEventValue");
+
+        Schema.Field contractVersion = fileEventValue.getField("contractVersion");
+        assertTrue(contractVersion != null, "FileEventValue.contractVersion must exist");
+        assertEquals(Schema.Type.UNION, contractVersion.schema().getType());
+        assertTrue(contractVersion.schema().getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.NULL));
+        assertTrue(contractVersion.schema().getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.STRING));
+        assertTrue(contractVersion.hasDefaultValue());
+
+        Schema.Field routedAt = fileEventValue.getField("routedAtEpochMillis");
+        assertTrue(routedAt != null, "FileEventValue.routedAtEpochMillis must exist");
+        assertEquals(Schema.Type.UNION, routedAt.schema().getType());
+        assertTrue(routedAt.schema().getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.NULL));
+        assertTrue(routedAt.schema().getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.LONG));
+        assertTrue(routedAt.hasDefaultValue());
+    }
+
+    @Test
     void currentSchemasRemainBackwardCompatibleWithPullRequestBase() throws Exception {
         String baseDir = System.getenv("BASE_SCHEMA_DIR");
         if (baseDir == null || baseDir.isBlank() || !Files.isDirectory(Path.of(baseDir))) {
