@@ -2,8 +2,7 @@ name: Publish contracts
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [ main ]
 
 permissions:
   contents: read
@@ -20,12 +19,6 @@ jobs:
           java-version: '21'
           cache: maven
           server-id: github
-      - name: Validate tag matches project version
-        run: |
-          set -euo pipefail
-          tag_version="${GITHUB_REF_NAME#v}"
-          project_version="$(mvn -q -DforceStdout help:evaluate -Dexpression=project.version)"
-          test "$tag_version" = "$project_version"
       - name: Publish Maven artifact to GitHub Packages
         run: mvn -B deploy -DskipTests
         env:
