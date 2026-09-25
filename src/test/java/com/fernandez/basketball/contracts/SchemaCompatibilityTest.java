@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SchemaCompatibilityTest {
@@ -19,6 +20,19 @@ class SchemaCompatibilityTest {
     void everyCurrentSchemaParsesAndHasUniqueFullName() throws Exception {
         Map<String, Schema> current = loadSchemas(Path.of("src/main/avro"));
         assertTrue(current.size() >= 14, "Expected all shared Basketball Stats contracts");
+    }
+
+    @Test
+    void fileEventValueSupportsOptionalExpectedRows() throws Exception {
+        Map<String, Schema> current = loadSchemas(Path.of("src/main/avro"));
+        Schema fileEventValue = current.get("com.example.csvwatcher.watcher.FileEventValue");
+
+        Schema.Field expectedRows = fileEventValue.getField("expectedRows");
+        assertTrue(expectedRows != null, "FileEventValue.expectedRows must exist");
+        assertEquals(Schema.Type.UNION, expectedRows.schema().getType());
+        assertTrue(expectedRows.schema().getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.NULL));
+        assertTrue(expectedRows.schema().getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.LONG));
+        assertNull(expectedRows.defaultVal());
     }
 
     @Test
