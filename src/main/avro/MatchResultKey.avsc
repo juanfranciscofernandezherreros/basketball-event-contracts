@@ -1,0 +1,8 @@
+{
+  "type": "record",
+  "name": "MatchResultKey",
+  "namespace": "com.fernandez.results.avro",
+  "fields": [
+    {"name":"matchId","type":"string"}
+  ]
+}
