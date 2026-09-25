@@ -1,25 +1,59 @@
 name: Publish contracts
 
 on:
-  push:
-    branches: [ main ]
+  workflow_run:
+    workflows: [auto-merge]
+    types: [completed]
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
   publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '21'
           cache: maven
           server-id: github
+
       - name: Publish Maven artifact to GitHub Packages
         run: mvn -B deploy -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete stale KAN-17 bootstrap branch if present
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const ref = 'heads/KAN-17-centralize-avro-contracts';
+
+            try {
+              await github.rest.git.getRef({ owner, repo, ref });
+            } catch (error) {
+              if (error.status === 404) {
+                core.info('Stale bootstrap branch already absent.');
+                return;
+              }
+              throw error;
+            }
+
+            await github.rest.git.deleteRef({ owner, repo, ref });
+
+            try {
+              await github.rest.git.getRef({ owner, repo, ref });
+              core.setFailed('Stale bootstrap branch still exists after deletion.');
+            } catch (error) {
+              if (error.status !== 404) throw error;
+              core.info('Verified stale bootstrap branch deleted.');
+            }

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2 - 2026-09-25
+
+- [patch] Ejecuta publicación y limpieza después de completar el workflow `auto-merge`, evitando depender de eventos `push` suprimidos por `GITHUB_TOKEN`.
+- [patch] Publica el artefacto Maven desde `main` y elimina/verifica la rama bootstrap pendiente.
+
+
 ## 1.0.1 - 2026-09-25
 
 - [patch] Publica automáticamente el artefacto Maven en GitHub Packages al integrar cambios en `main`.
