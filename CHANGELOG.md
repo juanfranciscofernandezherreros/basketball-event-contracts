@@ -1,16 +1,20 @@
 # Changelog
 
+## 1.1.0 - 2026-09-25
+
+- [minor] KAN-84 añade `expectedRows` opcional a `FileEventValue`, con default `null`.
+- [minor] Mantiene compatibilidad hacia atrás para consumidores que solo usan `fileType` y `filePath`.
+- [minor] Añade una prueba explícita del contrato opcional requerido por POINT_BY_POINT.
+
 ## 1.0.2 - 2026-09-25
 
 - [patch] Ejecuta publicación y limpieza después de completar el workflow `auto-merge`, evitando depender de eventos `push` suprimidos por `GITHUB_TOKEN`.
 - [patch] Publica el artefacto Maven desde `main` y elimina/verifica la rama bootstrap pendiente.
 
-
 ## 1.0.1 - 2026-09-25
 
 - [patch] Publica automáticamente el artefacto Maven en GitHub Packages al integrar cambios en `main`.
 - [patch] Añade limpieza de la rama inicial de KAN-17 que quedó tras el primer merge manual.
-
 
 ## 1.0.0 - 2026-09-25
 

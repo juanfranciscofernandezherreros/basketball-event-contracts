@@ -22,6 +22,19 @@ class SchemaCompatibilityTest {
     }
 
     @Test
+    void fileEventValueSupportsOptionalExpectedRows() throws Exception {
+        Map<String, Schema> current = loadSchemas(Path.of("src/main/avro"));
+        Schema fileEventValue = current.get("com.example.csvwatcher.watcher.FileEventValue");
+
+        Schema.Field expectedRows = fileEventValue.getField("expectedRows");
+        assertTrue(expectedRows != null, "FileEventValue.expectedRows must exist");
+        assertEquals(Schema.Type.UNION, expectedRows.schema().getType());
+        assertTrue(expectedRows.schema().getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.NULL));
+        assertTrue(expectedRows.schema().getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.LONG));
+        assertTrue(expectedRows.hasDefaultValue());
+    }
+
+    @Test
     void currentSchemasRemainBackwardCompatibleWithPullRequestBase() throws Exception {
         String baseDir = System.getenv("BASE_SCHEMA_DIR");
         if (baseDir == null || baseDir.isBlank() || !Files.isDirectory(Path.of(baseDir))) {
