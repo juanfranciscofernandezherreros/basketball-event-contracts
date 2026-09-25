@@ -8,7 +8,7 @@ Fuente de verdad de los contratos Kafka/Avro compartidos por los microservicios 
 <dependency>
   <groupId>com.fernandez.basketball</groupId>
   <artifactId>basketball-event-contracts</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
 </dependency>
 ```
 
@@ -21,8 +21,10 @@ El artefacto se publica en GitHub Packages y contiene las clases Java generadas 
 - `fileType`
 - `filePath`
 - `expectedRows` opcional (`null` por defecto), usado por flujos que conocen de antemano el número esperado de filas, como POINT_BY_POINT.
+- `contractVersion` opcional (`null` por defecto), rellenado por el router para identificar la versión común aplicada al evento.
+- `routedAtEpochMillis` opcional (`null` por defecto), timestamp UTC epoch-millis del paso por el router.
 
-Añadir `expectedRows` es backward-compatible porque es nullable y tiene default `null`.
+Los campos opcionales usan unión con `null` y default `null`, por lo que la evolución sigue siendo backward-compatible con consumidores anteriores.
 
 ## Evolución de contratos
 
@@ -39,4 +41,4 @@ Baseline JDK 21.
 mvn -B test
 ```
 
-Jira: KAN-17 / KAN-84.
+Jira: KAN-17 / KAN-84 / KAN-75.
