@@ -11,7 +11,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SchemaCompatibilityTest {
@@ -32,7 +31,7 @@ class SchemaCompatibilityTest {
         assertEquals(Schema.Type.UNION, expectedRows.schema().getType());
         assertTrue(expectedRows.schema().getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.NULL));
         assertTrue(expectedRows.schema().getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.LONG));
-        assertNull(expectedRows.defaultVal());
+        assertTrue(expectedRows.hasDefaultValue());
     }
 
     @Test
