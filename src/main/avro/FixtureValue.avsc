@@ -6,6 +6,7 @@
     {"name":"matchId","type":"string"},
     {"name":"country","type":"string"},
     {"name":"competition","type":"string"},
+    {"name":"sourceEventId","type":["null","string"],"default":null},
     {"name":"eventTime","type":["null","string"],"default":null},
     {"name":"homeTeam","type":["null","string"],"default":null},
     {"name":"awayTeam","type":["null","string"],"default":null}
