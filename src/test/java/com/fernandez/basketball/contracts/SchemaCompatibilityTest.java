@@ -55,6 +55,21 @@ class SchemaCompatibilityTest {
     }
 
     @Test
+    void fixtureValueSupportsOptionalSourceEventId() throws Exception {
+        Map<String, Schema> current = loadSchemas(Path.of("src/main/avro"));
+        Schema fixtureValue = current.get("com.fernandez.fixtures.avro.FixtureValue");
+
+        Schema.Field sourceEventId = fixtureValue.getField("sourceEventId");
+        assertTrue(sourceEventId != null, "FixtureValue.sourceEventId must exist");
+        assertEquals(Schema.Type.UNION, sourceEventId.schema().getType());
+        assertTrue(sourceEventId.schema().getTypes().stream()
+                .anyMatch(type -> type.getType() == Schema.Type.NULL));
+        assertTrue(sourceEventId.schema().getTypes().stream()
+                .anyMatch(type -> type.getType() == Schema.Type.STRING));
+        assertTrue(sourceEventId.hasDefaultValue());
+    }
+
+    @Test
     void currentSchemasRemainBackwardCompatibleWithPullRequestBase() throws Exception {
         String baseDir = System.getenv("BASE_SCHEMA_DIR");
         if (baseDir == null || baseDir.isBlank() || !Files.isDirectory(Path.of(baseDir))) {
