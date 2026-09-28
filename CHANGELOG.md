@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.0 - 2026-09-28
+
+- [minor] KAN-39 añade `sourceEventId` opcional a `FixtureValue`.
+- [minor] El nuevo campo es nullable y con default `null` para mantener compatibilidad hacia atrás.
+- [minor] Habilita trazabilidad de FIXTURES desde el evento de ingestión hasta persistence.
+
+
 ## 1.3.0 - 2026-09-28
 
 - [minor] KAN-28 añade `MatchResultValue` como contrato canónico de `results.parsed`.
