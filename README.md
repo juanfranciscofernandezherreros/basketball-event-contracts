@@ -8,11 +8,17 @@ Fuente de verdad de los contratos Kafka/Avro compartidos por los microservicios 
 <dependency>
   <groupId>com.fernandez.basketball</groupId>
   <artifactId>basketball-event-contracts</artifactId>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
 </dependency>
 ```
 
 El artefacto se publica en GitHub Packages y contiene las clases Java generadas desde `src/main/avro`.
+
+### RESULTS
+
+`MatchResultValue` es el value canónico de `results.parsed`. Incluye `sourceEventId`
+para trazabilidad e idempotencia, junto con el identificador del partido, marcador,
+parciales y metadatos de competición.
 
 ### FileEvent
 

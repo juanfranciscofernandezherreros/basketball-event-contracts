@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 - 2026-09-28
+
+- [minor] KAN-28 añade `MatchResultValue` como contrato canónico de `results.parsed`.
+- [minor] Incluye `sourceEventId` para preservar trazabilidad e idempotencia entre parser y persistence.
+
 ## 1.2.0 - 2026-09-25
 
 - [minor] KAN-75 añade `contractVersion` opcional a `FileEventValue` para trazabilidad de contrato.
