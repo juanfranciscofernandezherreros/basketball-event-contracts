@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.5.0 - 2026-10-01
+
+- [minor] KAN-261 añade `PersistedEventKey` y `PersistedEventValue` como contrato canónico para eventos `*.persisted.success`.
+- [minor] El contrato conserva trazabilidad mediante `sourceEventId`, admite `importId` y `persistedRecords` opcionales e incluye dataset, timestamp de persistencia y versión de contrato.
+- [minor] Documenta los seis topics `*.persisted.success` y mantiene las DLT existentes como única salida de error definitivo.
+- [minor] Añade pruebas de parsing, campos requeridos y round-trip de serialización Avro.
+
 ## 1.4.0 - 2026-09-28
 
 - [minor] KAN-39 añade `sourceEventId` opcional a `FixtureValue`.

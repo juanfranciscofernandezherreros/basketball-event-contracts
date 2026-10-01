@@ -1,0 +1,8 @@
+{
+  "namespace": "com.fernandez.basketball.persistence",
+  "type": "record",
+  "name": "PersistedEventKey",
+  "fields": [
+    {"name": "sourceEventId", "type": "string"}
+  ]
+}

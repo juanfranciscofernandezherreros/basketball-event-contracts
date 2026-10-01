@@ -18,7 +18,7 @@ class SchemaCompatibilityTest {
     @Test
     void everyCurrentSchemaParsesAndHasUniqueFullName() throws Exception {
         Map<String, Schema> current = loadSchemas(Path.of("src/main/avro"));
-        assertTrue(current.size() >= 14, "Expected all shared Basketball Stats contracts");
+        assertTrue(current.size() >= 16, "Expected all shared Basketball Stats contracts");
     }
 
     @Test
