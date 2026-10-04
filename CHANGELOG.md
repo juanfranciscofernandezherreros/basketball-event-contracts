@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.1 - 2026-10-04
+
+- [patch] Sincroniza la versión del artefacto, documentación, contrato Avro y pruebas a `1.5.1`, manteniendo el inventario de consumidores CSV.
+
 ## 1.5.0 - 2026-10-01
 
 - [minor] KAN-261 añade `PersistedEventKey` y `PersistedEventValue` como contrato canónico para eventos `*.persisted.success`.

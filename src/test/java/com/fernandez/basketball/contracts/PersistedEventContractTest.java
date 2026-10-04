@@ -43,7 +43,7 @@ class PersistedEventContractTest {
         assertTrue(persistedRecords.schema().getTypes().stream().anyMatch(type -> type.getType() == Schema.Type.LONG));
         assertTrue(persistedRecords.hasDefaultValue());
 
-        assertEquals("1.5.0", value.getField("contractVersion").defaultVal().toString());
+        assertEquals("1.5.1", value.getField("contractVersion").defaultVal().toString());
     }
 
     @Test
@@ -58,7 +58,7 @@ class PersistedEventContractTest {
                 .setDatasetType("RESULTS")
                 .setPersistedAtEpochMillis(1_780_000_000_000L)
                 .setPersistedRecords(42L)
-                .setContractVersion("1.5.0")
+                .setContractVersion("1.5.1")
                 .build();
 
         ByteArrayOutputStream output = new ByteArrayOutputStream();
