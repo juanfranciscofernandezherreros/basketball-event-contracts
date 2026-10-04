@@ -8,7 +8,7 @@ Fuente de verdad de los contratos Kafka/Avro compartidos por los microservicios 
 <dependency>
   <groupId>com.fernandez.basketball</groupId>
   <artifactId>basketball-event-contracts</artifactId>
-  <version>1.5.0</version>
+  <version>1.5.1</version>
 </dependency>
 ```
 
@@ -66,6 +66,9 @@ Los campos opcionales usan unión con `null` y default `null`, por lo que la evo
 - Cambios incompatibles: MAJOR.
 - En Pull Requests, CI compara los schemas actuales con los de la rama base mediante `SchemaCompatibility`.
 - Un contrato compartido no debe copiarse manualmente a un microservicio una vez este haya sido migrado al artefacto común.
+
+La publicación de una nueva versión debe propagarse a todos los consumidores
+inventariados en `AGENTS.md`; la verificación se hace sobre `origin/main`.
 
 ## Desarrollo
 

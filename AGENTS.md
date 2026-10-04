@@ -42,6 +42,47 @@ El trabajo no termina hasta completar merge y limpieza.
 - Añadir tests de parsing/compilación de schemas para cada cambio.
 - Los microservicios deben consumir una versión publicada de este artefacto, no copiar archivos `.avsc`.
 
+## Propagación obligatoria a consumidores CSV
+
+Este repositorio es el inventario canónico de los consumidores de
+`com.fernandez.basketball:basketball-event-contracts`. Al publicar una versión
+nueva, se debe actualizar **la misma versión** en todos estos repositorios:
+
+- `csv-file-event-router`
+- `csv-fixtures-parser`
+- `csv-fixtures-persistence`
+- `csv-match-normalizer`
+- `csv-point-by-point-parser`
+- `csv-point-by-point-persistence`
+- `csv-results-parser`
+- `csv-results-persistence`
+- `csv-stats-match-parser`
+- `csv-stats-match-persistence`
+- `csv-stats-player-parser`
+- `csv-stats-player-persistence`
+- `csv-team-stats-parser`
+- `csv-team-stats-persistence`
+- `csv-watcher`
+
+`csv-processing-core` no declara este artefacto y queda fuera del ciclo.
+
+### Regla de publicación
+
+Una release de contratos no está finalizada hasta que cada consumidor de la
+lista haya seguido este ciclo: crear rama con la clave Jira, actualizar la
+dependencia y su versión patch, actualizar `CHANGELOG.md` y documentación,
+ejecutar sus pruebas con Java 21, abrir PR, comprobar los checks del SHA actual,
+fusionar y eliminar la rama origen. Antes de cerrar la tarea de contratos se
+debe verificar `origin/main` de cada repositorio, nunca solo una rama local.
+
+`AGENTS.md` obliga este comportamiento a los agentes, pero no ejecuta acciones
+por sí mismo. Para propagación realmente automática, la release debe disparar
+un workflow de GitHub Actions que reciba la versión publicada, abra una PR en
+cada repositorio de esta lista y la fusione únicamente tras sus checks. El
+workflow necesita un token con permisos `contents` y `pull-requests` sobre
+todos los repositorios (por ejemplo, un fine-grained PAT guardado como secreto
+de organización `CONTRACTS_SYNC_TOKEN`).
+
 ## Versionado
 
 - `patch`: corrección compatible.
@@ -50,4 +91,6 @@ El trabajo no termina hasta completar merge y limpieza.
 
 ## Tests
 
-Baseline Java: JDK 21. Ejecutar al menos `mvn -B test`.
+Baseline Java: JDK 21. Ejecutar siempre `./mvn-java.ps1 -B test`; el lanzador
+lee este archivo y selecciona el JDK únicamente para el proceso Maven, sin
+modificar `JAVA_HOME` global.
