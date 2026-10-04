@@ -42,11 +42,9 @@ El trabajo no termina hasta completar merge y limpieza.
 - Añadir tests de parsing/compilación de schemas para cada cambio.
 - Los microservicios deben consumir una versión publicada de este artefacto, no copiar archivos `.avsc`.
 
-## Propagación obligatoria a consumidores CSV
+## Inventario de consumidores CSV
 
-Este repositorio es el inventario canónico de los consumidores de
-`com.fernandez.basketball:basketball-event-contracts`. Al publicar una versión
-nueva, se debe actualizar **la misma versión** en todos estos repositorios:
+Consumidores de `com.fernandez.basketball:basketball-event-contracts`:
 
 - `csv-file-event-router`
 - `csv-fixtures-parser`
@@ -64,39 +62,7 @@ nueva, se debe actualizar **la misma versión** en todos estos repositorios:
 - `csv-team-stats-persistence`
 - `csv-watcher`
 
-`csv-processing-core` no declara este artefacto y queda fuera del ciclo.
-
-### Regla de publicación
-
-Una release de contratos no está finalizada hasta que cada consumidor de la
-lista haya seguido este ciclo: crear rama con la clave Jira, actualizar la
-dependencia y su versión patch, actualizar `CHANGELOG.md` y documentación,
-ejecutar sus pruebas con Java 21, abrir PR, comprobar los checks del SHA actual,
-fusionar y eliminar la rama origen. Antes de cerrar la tarea de contratos se
-debe verificar `origin/main` de cada repositorio, nunca solo una rama local.
-
-La automatización descrita arriba está implementada en
-`.github/workflows/propagate-contract-version.yml`; su configuración se detalla
-en la sección siguiente.
-
-### Automatización GitHub Actions
-
-`.github/workflows/propagate-contract-version.yml` se ejecuta después de que
-termine correctamente el flujo de publicación y también admite ejecución manual. Para cada
-consumidor crea una tarea Jira, actualiza dependencia, versión patch, README y
-CHANGELOG, ejecuta pruebas con Java 21, abre PR, espera los checks, fusiona y
-cierra Jira. Si falta la dependencia en un repositorio, el job falla para
-señalar que su migración inicial debe integrarse primero.
-
-Configurar estos secretos en el repositorio de contratos:
-
-- `CONTRACTS_SYNC_TOKEN`: fine-grained PAT con acceso de escritura a Contents y
-  Pull Requests, y lectura de Packages en los quince repositorios.
-- `JIRA_BASE_URL`, `JIRA_EMAIL` y `JIRA_API_TOKEN`: sitio y credenciales de una
-  cuenta que pueda crear y transicionar tareas en el proyecto Jira `KAN`.
-
-La ejecución manual acepta una versión publicada; vacía, usa `<revision>` de
-`pom.xml`.
+`csv-processing-core` no declara este artefacto y queda fuera del inventario.
 
 ## Versionado
 
@@ -106,6 +72,4 @@ La ejecución manual acepta una versión publicada; vacía, usa `<revision>` de
 
 ## Tests
 
-Baseline Java: JDK 21. Ejecutar siempre `./mvn-java.ps1 -B test`; el lanzador
-lee este archivo y selecciona el JDK únicamente para el proceso Maven, sin
-modificar `JAVA_HOME` global.
+Baseline Java: JDK 21. Ejecutar al menos `mvn -B test`.
