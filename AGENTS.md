@@ -75,13 +75,28 @@ ejecutar sus pruebas con Java 21, abrir PR, comprobar los checks del SHA actual,
 fusionar y eliminar la rama origen. Antes de cerrar la tarea de contratos se
 debe verificar `origin/main` de cada repositorio, nunca solo una rama local.
 
-`AGENTS.md` obliga este comportamiento a los agentes, pero no ejecuta acciones
-por sí mismo. Para propagación realmente automática, la release debe disparar
-un workflow de GitHub Actions que reciba la versión publicada, abra una PR en
-cada repositorio de esta lista y la fusione únicamente tras sus checks. El
-workflow necesita un token con permisos `contents` y `pull-requests` sobre
-todos los repositorios (por ejemplo, un fine-grained PAT guardado como secreto
-de organización `CONTRACTS_SYNC_TOKEN`).
+La automatización descrita arriba está implementada en
+`.github/workflows/propagate-contract-version.yml`; su configuración se detalla
+en la sección siguiente.
+
+### Automatización GitHub Actions
+
+`.github/workflows/propagate-contract-version.yml` se ejecuta después de que
+termine correctamente el flujo de publicación y también admite ejecución manual. Para cada
+consumidor crea una tarea Jira, actualiza dependencia, versión patch, README y
+CHANGELOG, ejecuta pruebas con Java 21, abre PR, espera los checks, fusiona y
+cierra Jira. Si falta la dependencia en un repositorio, el job falla para
+señalar que su migración inicial debe integrarse primero.
+
+Configurar estos secretos en el repositorio de contratos:
+
+- `CONTRACTS_SYNC_TOKEN`: fine-grained PAT con acceso de escritura a Contents y
+  Pull Requests, y lectura de Packages en los quince repositorios.
+- `JIRA_BASE_URL`, `JIRA_EMAIL` y `JIRA_API_TOKEN`: sitio y credenciales de una
+  cuenta que pueda crear y transicionar tareas en el proyecto Jira `KAN`.
+
+La ejecución manual acepta una versión publicada; vacía, usa `<revision>` de
+`pom.xml`.
 
 ## Versionado
 
