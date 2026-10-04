@@ -17,20 +17,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 2
-
-      - id: contract_changes
-        name: Check whether the package version or schemas changed
-        run: |
-          if git diff --quiet HEAD^ HEAD -- pom.xml src/main/avro; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "No contract artifact changes; skipping duplicate Maven publication."
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
 
       - uses: actions/setup-java@v5
-        if: steps.contract_changes.outputs.changed == 'true'
         with:
           distribution: temurin
           java-version: '21'
@@ -38,7 +26,6 @@ jobs:
           server-id: github
 
       - name: Publish Maven artifact to GitHub Packages
-        if: steps.contract_changes.outputs.changed == 'true'
         run: mvn -B deploy -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

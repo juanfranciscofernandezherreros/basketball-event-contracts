@@ -1,11 +1,5 @@
 # Changelog
 
-## 1.5.1 - 2026-10-04
-
-- [patch] KAN-285 añade propagación automática a consumidores con tareas Jira, pruebas, PRs y merge vía GitHub Actions.
-
-- [patch] Documenta el inventario canónico de consumidores CSV y el ciclo obligatorio de propagación tras cada publicación del contrato.
-
 ## 1.5.0 - 2026-10-01
 
 - [minor] KAN-261 añade `PersistedEventKey` y `PersistedEventValue` como contrato canónico para eventos `*.persisted.success`.
