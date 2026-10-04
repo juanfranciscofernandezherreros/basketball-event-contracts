@@ -70,6 +70,18 @@ Los campos opcionales usan unión con `null` y default `null`, por lo que la evo
 La publicación de una nueva versión debe propagarse a todos los consumidores
 inventariados en `AGENTS.md`; la verificación se hace sobre `origin/main`.
 
+## Propagación automática
+
+Al terminar correctamente el flujo de publicación, GitHub Actions crea las tareas Jira y PRs
+de los consumidores listados en `AGENTS.md`. Cada job actualiza la versión,
+ejecuta Maven con Java 21, espera los checks y fusiona la PR cuando todos pasan.
+También puede iniciarse manualmente desde Actions indicando una versión.
+
+Antes de usarlo, configura `CONTRACTS_SYNC_TOKEN`, `JIRA_BASE_URL`, `JIRA_EMAIL`
+y `JIRA_API_TOKEN` como secretos del repositorio. Los permisos requeridos están
+detallados en `AGENTS.md`. Si un consumidor aún no depende del artefacto, su job
+falla de forma explícita y requiere integrar su migración inicial.
+
 ## Desarrollo
 
 Baseline JDK 21.
