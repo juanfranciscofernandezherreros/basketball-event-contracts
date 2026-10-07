@@ -1,0 +1,19 @@
+{
+  "namespace": "com.fernandez.basketball.teamstats",
+  "type": "record",
+  "name": "TeamStatsRejectedValue",
+  "fields": [
+    {"name": "sourceEventId", "type": "string"},
+    {"name": "matchId", "type": "string"},
+    {"name": "period", "type": "string"},
+    {"name": "category", "type": "string"},
+    {"name": "metric", "type": "string"},
+    {"name": "reasonCode", "type": "string"},
+    {"name": "reasonDetail", "type": "string"},
+    {"name": "originalTopic", "type": "string", "default": "team-stats.parsed"},
+    {"name": "originalPartition", "type": ["null", "int"], "default": null},
+    {"name": "originalOffset", "type": ["null", "long"], "default": null},
+    {"name": "rejectedAtEpochMillis", "type": "long"},
+    {"name": "contractVersion", "type": "string", "default": "1.6.0"}
+  ]
+}

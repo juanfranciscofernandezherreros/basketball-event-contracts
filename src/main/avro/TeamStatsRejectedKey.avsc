@@ -1,0 +1,9 @@
+{
+  "namespace": "com.fernandez.basketball.teamstats",
+  "type": "record",
+  "name": "TeamStatsRejectedKey",
+  "fields": [
+    {"name": "sourceEventId", "type": "string"},
+    {"name": "matchId", "type": "string"}
+  ]
+}

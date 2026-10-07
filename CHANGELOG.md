@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.0
+
+- [minor] Adds the compatible `TeamStatsRejectedKey` and `TeamStatsRejectedValue` Avro contracts for functional rejections on `team-stats.rejected`.
+
 ## 1.5.1 - 2026-10-04
 
 - [patch] Sincroniza la versión del artefacto, documentación, contrato Avro y pruebas a `1.5.1`, manteniendo el inventario de consumidores CSV.
