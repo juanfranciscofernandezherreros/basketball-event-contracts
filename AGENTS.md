@@ -12,6 +12,15 @@ Está prohibida cualquier operación de escritura antes de completar este pre-fl
 
 Tras leer las reglas, el agente continúa de forma autónoma: elige una rama descriptiva, determina el nivel SemVer según el impacto real y documenta ambas decisiones en la PR. No debe pedir confirmaciones intermedias salvo petición expresa del usuario.
 
+### Pull Request y merge automáticos
+
+El agente debe crear automáticamente la Pull Request al terminar los cambios,
+vigilar los checks requeridos sobre el SHA actual y corregir los fallos en la
+misma rama. Cuando todos los checks aplicables estén en verde y GitHub no
+indique bloqueos, debe fusionarla automáticamente, eliminar la rama origen y
+verificar que la rama remota ya no existe. No debe pedir confirmación adicional
+para crear la PR, hacer merge o eliminar la rama después de un merge correcto.
+
 ## Prohibición absoluta de escritura directa en `main`
 
 Ningún cambio puede escribirse, commitearse ni pushearse directamente a `main`.
