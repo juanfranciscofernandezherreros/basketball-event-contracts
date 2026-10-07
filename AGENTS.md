@@ -20,7 +20,7 @@ Flujo obligatorio:
 1. Leer este `AGENTS.md` y sus reglas referenciadas.
 2. Buscar o crear la tarea Jira exacta y moverla a `En curso`.
 3. Partir de `main` actualizado y crear una rama con la clave Jira.
-4. Determinar SemVer; actualizar código, pruebas, `pom.xml`, `README.md` y `CHANGELOG.md`.
+4. Determinar SemVer; actualizar código, pruebas, `pom.xml` y `CHANGELOG.md`.
 5. Ejecutar las validaciones aplicables, como mínimo `mvn -B test`.
 6. Crear o actualizar automáticamente la Pull Request y corregir sus checks.
 7. Fusionar automáticamente cuando el SHA actual esté en verde y no haya bloqueos.
@@ -42,9 +42,15 @@ para crear la PR, hacer merge o eliminar la rama después de un merge correcto.
 
 ### Entrega automática obligatoria
 
-Antes de crear la PR, el agente debe comprobar y sincronizar `pom.xml`,
-`README.md` y `CHANGELOG.md` con la versión publicada. Tras el merge, debe
-continuar automáticamente con los consumidores afectados por el contrato:
+Antes de crear la PR, el agente debe comprobar y sincronizar `pom.xml` y
+`CHANGELOG.md` con la versión propuesta. Las referencias a la versión actual en
+`README.md` las sincroniza automáticamente el workflow de publicación: al
+publicar un contrato, compara el README con `<revision>` de `pom.xml` y abre
+una PR de documentación solo si hay diferencias. No se deben corregir esas
+referencias a mano ni incluirlas en la PR del contrato. La PR automática debe
+pasar CI y fusionarse por el flujo habitual; su merge no debe volver a publicar
+el artefacto. Tras el merge, el agente debe continuar automáticamente con los
+consumidores afectados por el contrato:
 actualizar dependencias, implementar el uso del nuevo contrato, crear los
 topics/configuración necesarios, validar el flujo de extremo a extremo y dejar
 trazabilidad Jira. No debe declarar la tarea completa hasta cerrar esas acciones
