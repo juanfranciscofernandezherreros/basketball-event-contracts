@@ -8,6 +8,25 @@ La primera operación de lectura del repositorio en cada tarea o sesión debe se
 
 Está prohibida cualquier operación de escritura antes de completar este pre-flight.
 
+## Jira obligatorio: primer gate de trabajo
+
+Cada cambio requiere una tarea Jira antes de crear una rama o modificar archivos.
+El agente debe buscar primero una tarea existente y, si no la hay, crear una.
+Debe moverla a `En curso` antes de cualquier escritura y usar su clave en la
+rama, los commits, la Pull Request y los comentarios de progreso.
+
+Flujo obligatorio:
+
+1. Leer este `AGENTS.md` y sus reglas referenciadas.
+2. Buscar o crear la tarea Jira exacta y moverla a `En curso`.
+3. Partir de `main` actualizado y crear una rama con la clave Jira.
+4. Determinar SemVer; actualizar código, pruebas, `pom.xml`, `README.md` y `CHANGELOG.md`.
+5. Ejecutar las validaciones aplicables, como mínimo `mvn -B test`.
+6. Crear o actualizar automáticamente la Pull Request y corregir sus checks.
+7. Fusionar automáticamente cuando el SHA actual esté en verde y no haya bloqueos.
+8. Eliminar la rama origen, verificar su eliminación y comentar la evidencia en Jira.
+9. Mover la tarea Jira a `Finalizado` solo tras completar los pasos anteriores.
+
 ## Autonomía sin bloqueos
 
 Tras leer las reglas, el agente continúa de forma autónoma: elige una rama descriptiva, determina el nivel SemVer según el impacto real y documenta ambas decisiones en la PR. No debe pedir confirmaciones intermedias salvo petición expresa del usuario.
@@ -35,22 +54,9 @@ o crear y enlazar las tareas Jira necesarias para los pasos posteriores.
 
 Ningún cambio puede escribirse, commitearse ni pushearse directamente a `main`.
 
-Toda modificación debe seguir este flujo:
-
-1. Leer `AGENTS.md` y reglas referenciadas.
-2. Partir del `main` actualizado.
-3. Crear una rama dedicada antes de modificar archivos.
-4. Determinar y aplicar el incremento SemVer.
-5. Realizar cambios exclusivamente en la rama.
-6. Actualizar `CHANGELOG.md`.
-7. Mantener README, POM y documentación de versión sincronizados.
-8. Ejecutar como mínimo `mvn -B test`.
-9. Abrir/actualizar PR hacia `main`.
-10. Corregir checks fallidos en la misma rama/PR.
-11. Fusionar solo con checks aplicables en verde sobre el SHA actual.
-12. Eliminar la rama origen tras merge y verificar su desaparición.
-
-El trabajo no termina hasta completar merge y limpieza.
+La secuencia operativa obligatoria está definida en **Jira obligatorio: primer
+gate de trabajo**. El trabajo no termina hasta completar merge, limpieza de la
+rama y cierre de Jira.
 
 ## Contratos Avro
 
