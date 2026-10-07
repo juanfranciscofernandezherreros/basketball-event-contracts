@@ -14,7 +14,7 @@ Fuente de verdad de los contratos Kafka/Avro compartidos por los microservicios 
 <dependency>
   <groupId>com.fernandez.basketball</groupId>
   <artifactId>basketball-event-contracts</artifactId>
-  <version>1.5.1</version>
+  <version>1.6.0</version>
 </dependency>
 ```
 
@@ -31,7 +31,7 @@ La key usa `sourceEventId`. El value incluye:
 - `datasetType`: tipo lógico del dataset persistido.
 - `persistedAtEpochMillis`: instante UTC epoch-millis de finalización.
 - `persistedRecords`: número opcional de registros persistidos.
-- `contractVersion`: versión del contrato, con default `1.5.1`.
+- `contractVersion`: versión del contrato, con default `1.6.0`.
 
 Topics canónicos de éxito:
 
