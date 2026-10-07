@@ -1,5 +1,11 @@
 # basketball-event-contracts
 
+## Version 1.6.0
+
+This release adds the central Avro contracts `TeamStatsRejectedKey` and
+`TeamStatsRejectedValue` for functional data rejections published on
+`team-stats.rejected`.
+
 Fuente de verdad de los contratos Kafka/Avro compartidos por los microservicios **Basketball Stats**.
 
 ## Artefacto Maven
