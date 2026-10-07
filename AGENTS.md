@@ -21,6 +21,16 @@ indique bloqueos, debe fusionarla automáticamente, eliminar la rama origen y
 verificar que la rama remota ya no existe. No debe pedir confirmación adicional
 para crear la PR, hacer merge o eliminar la rama después de un merge correcto.
 
+### Entrega automática obligatoria
+
+Antes de crear la PR, el agente debe comprobar y sincronizar `pom.xml`,
+`README.md` y `CHANGELOG.md` con la versión publicada. Tras el merge, debe
+continuar automáticamente con los consumidores afectados por el contrato:
+actualizar dependencias, implementar el uso del nuevo contrato, crear los
+topics/configuración necesarios, validar el flujo de extremo a extremo y dejar
+trazabilidad Jira. No debe declarar la tarea completa hasta cerrar esas acciones
+o crear y enlazar las tareas Jira necesarias para los pasos posteriores.
+
 ## Prohibición absoluta de escritura directa en `main`
 
 Ningún cambio puede escribirse, commitearse ni pushearse directamente a `main`.
